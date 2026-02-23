@@ -1,0 +1,30 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Replace brand logo with user-provided two-line logo",
+  "requirements": [
+    {
+      "id": "REQ-15",
+      "summary": "Replace existing brand logo with user-uploaded two-line logo preserving exact visual fidelity",
+      "acceptanceCriteria": [
+        "The uploaded two-line logo appears in the header navigation exactly as provided",
+        "Logo maintains its original dimensions, colors, and clarity",
+        "Logo is saved as brand-logo.dim_200x60.png in frontend/public/assets/generated",
+        "No automatic resizing, compression, or filtering is applied to the logo",
+        "Logo displays correctly on both desktop and mobile viewports"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/brand-logo.dim_200x60.png",
+          "operation": "modify",
+          "description": "Replace the existing brand-logo.dim_200x60.png with the user-provided two-line logo image (frontend/public/assets/two line logo resized.png). This is a direct file replacement with no modifications, compression, or re-encoding applied to preserve exact visual fidelity including dimensions, colors, and clarity."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "operation": "modify",
+          "description": "Verify that the header navigation correctly references and displays the logo from /assets/generated/brand-logo.dim_200x60.png. Ensure the img element uses appropriate attributes to prevent browser-side resizing or compression. Confirm logo displays correctly in both desktop and mobile navigation contexts without any CSS transforms or filters that might alter its appearance."
+        }
+      ]
+    }
+  ]
+}

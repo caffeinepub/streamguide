@@ -1,0 +1,22 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-existing-brand-logo-dim-200x60-png-with-the-user-uploaded-two-line-logo-image-two-line-logo-resized-png-preserving-its-exact-appearance-without-any-automated-resizing-compression-or-color-modification",
+      "featureTitle": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
+      "files": [],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

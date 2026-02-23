@@ -1,0 +1,43 @@
+{
+  "kind": "build_request",
+  "title": "Replace brand logo with user-provided two-line logo",
+  "projectName": "The Smart Choice",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-15",
+      "text": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "this is the original logo resized properly. please use this as it is for the website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The uploaded two-line logo appears in the header navigation exactly as provided",
+        "Logo maintains its original dimensions, colors, and clarity",
+        "Logo is saved as brand-logo.dim_200x60.png in frontend/public/assets/generated",
+        "No automatic resizing, compression, or filtering is applied to the logo",
+        "Logo displays correctly on both desktop and mobile viewports"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify the uploaded logo image in any way during processing",
+    "Use the exact PNG file provided by the user without re-encoding or compression"
+  ],
+  "nonGoals": [
+    "Adjusting logo dimensions or aspect ratio",
+    "Changing logo colors or applying filters",
+    "Creating alternative logo versions"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": [
+      "Replace with the user-uploaded two-line logo maintaining exact visual fidelity (brand-logo.dim_200x60.png > brand-logo.dim_200x60.png)"
+    ]
+  }
+}

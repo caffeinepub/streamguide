@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "Website for India-based grade 8–10 students and their parents to get education counseling, including contact inquiries and booking psychometric tests or 1:1 counseling sessions to help choose a post-10th education stream.",
+  "architectural_notes": [
+    "Target audience: grade 8–10 students in India and their parents; purpose is guidance on choosing education stream after 10th.",
+    "App/brand name should be displayed as \"The Smart Choice\" consistently across all pages and UI copy (replacing \"StreamGuide\")."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Edit Images\n- Replace with the user-uploaded two-line logo maintaining exact visual fidelity (brand-logo.dim_200x60.png > brand-logo.dim_200x60.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-the-public-website-structure-and-navigation-for-an-india-focused-education-counseling-service-targeting-grade-8-10-students-and-their-parents-including-clear-calls-to-action-for-contact-us-book-psychometric-test-and-book-1-1-counseling",
+      "title": "Create the public website structure and navigation for an India-focused education counseling service targeting grade 8–10 students and their parents, including clear calls-to-action for “Contact Us”, “Book Psychometric Test”, and “Book 1:1 Counseling”.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-contact-us-inquiry-form-for-education-counseling-that-collects-at-minimum-name-who-is-filling-the-form-student-parent-student-grade-8-9-10-city-state-free-text-email-and-or-phone-preferred-contact-method-and-a-message-describing-the-need",
+      "title": "Implement a “Contact Us” inquiry form for education counseling that collects at minimum: name, who is filling the form (student/parent), student grade (8/9/10), city/state (free text), email and/or phone, preferred contact method, and a message describing the need.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-booking-flow-for-a-psychometric-test-that-allows-a-user-to-submit-a-booking-request-with-name-student-grade-8-9-10-email-phone-city-state-preferred-date-preferred-time-window-and-any-notes-questions",
+      "title": "Implement a booking flow for a psychometric test that allows a user to submit a booking request with: name, student grade (8/9/10), email/phone, city/state, preferred date, preferred time window, and any notes/questions.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-booking-flow-for-a-one-on-one-counseling-session-that-allows-a-user-to-submit-a-booking-request-with-name-who-is-booking-student-parent-student-grade-8-9-10-email-phone-city-state-preferred-date-preferred-time-window-preferred-mode-online-in-person-and-notes-questions",
+      "title": "Implement a booking flow for a one-on-one counseling session that allows a user to submit a booking request with: name, who is booking (student/parent), student grade (8/9/10), email/phone, city/state, preferred date, preferred time window, preferred mode (online/in-person), and notes/questions.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-frontend-forms-to-the-backend-using-react-query-mutations-for-submission-and-show-user-friendly-loading-success-and-error-states-for-each-form-submission",
+      "title": "Wire the frontend forms to the backend using React Query mutations for submission and show user-friendly loading, success, and error states for each form submission.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-cohesive-distinct-visual-theme-for-the-site-colors-typography-spacing-components-suited-to-indian-middle-high-school-students-and-parents-avoid-blue-purple-as-the-dominant-palette-apply-the-theme-consistently-across-all-pages-and-forms",
+      "title": "Establish a cohesive, distinct visual theme for the site (colors, typography, spacing, components) suited to Indian middle/high school students and parents; avoid blue/purple as the dominant palette; apply the theme consistently across all pages and forms.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-generated-brand-marketing-images-to-support-the-site-s-homepage-and-service-pages-and-render-them-from-frontend-static-assets-no-backend-image-serving",
+      "title": "Add static generated brand/marketing images to support the site’s homepage and service pages, and render them from frontend static assets (no backend image serving).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-app-brand-name-from-streamguide-to-the-smart-choice-throughout-the-website-including-all-visible-ui-text-and-the-browser-tab-title",
+      "title": "Change the app/brand name from \"StreamGuide\" to \"The Smart Choice\" throughout the website, including all visible UI text and the browser tab title.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-psychometric-test-user-experience-to-clearly-display-pricing-as-mrp-rs-1249-and-an-intro-offer-price-of-rs-749-using-english-user-facing-text-and-visually-differentiating-the-offer-price-from-the-mrp-e-g-strikethrough-mrp-and-highlighted-offer-pricing-must-be-visible-on-the-psychometric-test-page-and-near-the-psychometric-test-booking-call-to-action-form-so-users-see-it-before-submitting-the-booking-request",
+      "title": "Update the Psychometric Test user experience to clearly display pricing as MRP Rs. 1249 and an intro offer price of Rs. 749, using English user-facing text and visually differentiating the offer price from the MRP (e.g., strikethrough MRP and highlighted offer). Pricing must be visible on the Psychometric Test page and near the psychometric test booking call-to-action/form so users see it before submitting the booking request.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-floating-whatsapp-chat-widget-fixed-to-the-bottom-right-of-the-site-on-all-pages-clicking-the-widget-must-open-whatsapp-app-or-web-using-the-official-click-to-chat-url-for-91-9811575100-with-the-prefilled-message-hi-i-d-like-to-know-more-about-your-services",
+      "title": "Add a floating WhatsApp chat widget fixed to the bottom-right of the site on all pages. Clicking the widget must open WhatsApp (app or web) using the official Click-to-Chat URL for +91-9811575100 with the prefilled message \"Hi, I'd like to know more about your services.\".",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-save-the-user-uploaded-brand-logo-image-default-png-as-a-static-asset-in-frontend-public-assets-generated-with-the-filename-brand-logo-dim-200x60-png-and-ensure-it-is-optimized-for-web-display-in-the-header-navigation",
+      "title": "Save the user-uploaded brand logo image (default.png) as a static asset in frontend/public/assets/generated with the filename brand-logo.dim_200x60.png and ensure it is optimized for web display in the header navigation",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-sitelayout-header-component-to-display-the-brand-logo-image-on-the-left-side-of-the-navigation-bar-ensuring-it-links-to-the-homepage-and-is-properly-sized-and-aligned-with-the-navigation-links",
+      "title": "Update the SiteLayout header component to display the brand logo image on the left side of the navigation bar, ensuring it links to the homepage and is properly sized and aligned with the navigation links",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-brand-logo-is-also-displayed-in-the-mobile-menu-header-with-appropriate-sizing-and-positioning-for-smaller-screens",
+      "title": "Ensure the brand logo is also displayed in the mobile menu header with appropriate sizing and positioning for smaller screens",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-brand-logo-dim-200x60-png-with-the-user-uploaded-two-line-logo-image-two-line-logo-resized-png-preserving-its-exact-appearance-without-any-automated-resizing-compression-or-color-modification",
+      "title": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Contact us form for education counseling inquiries (students/parents)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Booking flow for psychometric test sessions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Booking flow for one-on-one counseling sessions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Create backend data models and APIs (single Motoko actor) to persist and retrieve contact inquiries and booking requests, including timestamps and a simple status field (e.g., New/Reviewed/Closed) that defaults to New on creation.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Rename app/brand from \"StreamGuide\" to \"The Smart Choice\" throughout the website",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Display psychometric test pricing with MRP Rs. 1249 and intro offer price Rs. 749 on the website/booking flow",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Add a floating WhatsApp chat widget (bottom-right) linking to +91-9811575100 with prefilled message: \"Hi, I'd like to know more about your services.\"",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "The Smart Choice",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

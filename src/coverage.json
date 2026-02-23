@@ -1,0 +1,37 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-23T10:36:19.871Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-15",
+        "summary": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/brand-logo.dim_200x60.png",
+          "frontend/src/components/layout/SiteLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/brand-logo.dim_200x60.png"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/brand-logo.dim_200x60.png",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
