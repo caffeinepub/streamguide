@@ -1,0 +1,42 @@
+{
+  "kind": "build_request",
+  "title": "Replace native counseling booking form with Tally embed on 1:1 Counseling Session page",
+  "projectName": "The Smart Choice",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "On the 1:1 Counseling Session page (CounselingPage.tsx), replace the existing native CounselingBookingForm component with the Tally embedded form using the following embed code: iframe with data-tally-src='https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1', loading='lazy', width='100%', height='897', frameborder='0', marginheight='0', marginwidth='0', title='Counseling Session'. Load the Tally embed script (https://tally.so/widgets/embed.js) dynamically using a useEffect hook that replicates the provided script logic: check if Tally is already defined and call Tally.loadEmbeds(), otherwise inject the script tag if not already present. The existing TallyFormEmbed component (frontend/src/components/forms/TallyFormEmbed.tsx) should be reused or updated to support this embed code pattern if it does not already handle it correctly.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "<iframe data-tally-src=\"https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1\" loading=\"lazy\" width=\"100%\" height=\"897\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" title=\"Counseling Session\"></iframe>"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The 1:1 Counseling Session page no longer renders the native CounselingBookingForm component in the booking section.",
+        "The Tally form iframe with src resolved to https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1 is rendered in its place.",
+        "The Tally embed script is loaded so the iframe renders the form correctly without a blank embed.",
+        "The rest of the CounselingPage (hero, session expectations, benefits sections) remains unchanged.",
+        "The scroll-to-form functionality on the page still scrolls to the Tally embed section."
+      ]
+    }
+  ],
+  "constraints": [
+    "Preserve all other sections of CounselingPage.tsx (hero, session expectations, benefits) exactly as they are.",
+    "Do not remove or modify the CounselingBookingForm component file itself — only stop using it on CounselingPage.tsx.",
+    "Use the exact Tally embed URL and parameters provided: https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1"
+  ],
+  "nonGoals": [
+    "Modifying the backend counseling booking logic or Motoko actor.",
+    "Changing the Contact page Tally form.",
+    "Altering global styles, fonts, or layout components."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

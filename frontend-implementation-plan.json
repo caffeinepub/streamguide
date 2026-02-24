@@ -1,0 +1,30 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Replace native counseling booking form with Tally embed on 1:1 Counseling Session page",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Replace CounselingBookingForm with Tally embedded form on CounselingPage",
+      "acceptanceCriteria": [
+        "The 1:1 Counseling Session page no longer renders the native CounselingBookingForm component in the booking section.",
+        "The Tally form iframe with src resolved to https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1 is rendered in its place.",
+        "The Tally embed script is loaded so the iframe renders the form correctly without a blank embed.",
+        "The rest of the CounselingPage (hero, session expectations, benefits sections) remains unchanged.",
+        "The scroll-to-form functionality on the page still scrolls to the Tally embed section."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "operation": "modify",
+          "description": "Review and update the TallyFormEmbed component to ensure it properly handles iframe embeds with data-tally-src attributes. The component must load the Tally embed script (https://tally.so/widgets/embed.js) dynamically using a useEffect hook that checks if window.Tally is defined and calls Tally.loadEmbeds(), otherwise injects the script tag if not already present. Ensure the component accepts props for the Tally form ID and supports the hideTitle and dynamicHeight parameters. The component should render an iframe element with data-tally-src, loading='lazy', width='100%', and appropriate height, along with other standard iframe attributes (frameBorder='0', marginHeight='0', marginWidth='0', title)."
+        },
+        {
+          "path": "frontend/src/pages/CounselingPage.tsx",
+          "operation": "modify",
+          "description": "Replace the CounselingBookingForm component import and usage with the TallyFormEmbed component. Remove the import for CounselingBookingForm. Import TallyFormEmbed from '../components/forms/TallyFormEmbed'. In the booking section (where CounselingBookingForm is currently rendered), replace it with <TallyFormEmbed /> configured to use the Tally form ID 'EkX2OB' with hideTitle=1 and dynamicHeight=1 parameters. Preserve all other sections of the page (hero, session expectations, benefits) exactly as they are. Ensure the scroll-to-form functionality (the ref and scroll behavior) still works by keeping the same section ref on the container that now holds the Tally embed."
+        }
+      ]
+    }
+  ]
+}

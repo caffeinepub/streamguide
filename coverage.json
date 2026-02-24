@@ -1,0 +1,42 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-24T10:34:06.537Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "On the 1:1 Counseling Session page (CounselingPage.tsx), replace the existing native CounselingBookingForm component with the Tally embedded form using the following embed code: iframe with data-tally-src='https://tally.so/embed/EkX2OB?hideTitle=1&dynamicHeight=1', loading='lazy', width='100%', height='897', frameborder='0', marginheight='0', marginwidth='0', title='Counseling Session'. Load the Tally embed script (https://tally.so/widgets/embed.js) dynamically using a useEffect hook that replicates the provided script logic: check if Tally is already defined and call Tally.loadEmbeds(), otherwise inject the script tag if not already present. The existing TallyFormEmbed component (frontend/src/components/forms/TallyFormEmbed.tsx) should be reused or updated to support this embed code pattern if it does not already handle it correctly.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "frontend/src/pages/CounselingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "frontend/src/pages/CounselingPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/forms/TallyFormEmbed.tsx",
+    "frontend/src/pages/ContactPage.tsx",
+    "frontend/src/pages/CounselingPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
