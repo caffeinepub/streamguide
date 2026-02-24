@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Replace the existing brand logo with the user-provided two-line logo image.
+**Goal:** Replace the custom contact form with an embedded Tally.so form on the Contact Us page.
 
 **Planned changes:**
-- Replace brand-logo.dim_200x60.png with the uploaded "two line logo resized.png" file
-- Preserve the exact appearance, dimensions, and colors of the uploaded logo without any modifications
+- Remove the ContactInquiryForm component from the Contact Us page
+- Integrate Tally.so form embed in the same location
+- Remove the backend contact inquiry submission endpoint and related types
 
-**User-visible outcome:** The header displays the new two-line logo with purple triangular graphics and "THE SMART CHOICE" text exactly as provided by the user.
+**User-visible outcome:** Users will see and interact with a Tally.so embedded form instead of the previous custom contact form when visiting the Contact Us page.

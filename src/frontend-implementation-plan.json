@@ -1,28 +1,41 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace brand logo with user-provided two-line logo",
+  "title": "Replace contact form with Tally.so form embed",
   "requirements": [
     {
-      "id": "REQ-15",
-      "summary": "Replace existing brand logo with user-uploaded two-line logo preserving exact visual fidelity",
+      "id": "REQ-1",
+      "summary": "Remove the existing ContactInquiryForm component from the Contact Us page",
       "acceptanceCriteria": [
-        "The uploaded two-line logo appears in the header navigation exactly as provided",
-        "Logo maintains its original dimensions, colors, and clarity",
-        "Logo is saved as brand-logo.dim_200x60.png in frontend/public/assets/generated",
-        "No automatic resizing, compression, or filtering is applied to the logo",
-        "Logo displays correctly on both desktop and mobile viewports"
+        "The ContactInquiryForm component is no longer rendered on the Contact Us page",
+        "The form section is replaced with the Tally form embed area"
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/brand-logo.dim_200x60.png",
+          "path": "frontend/src/pages/ContactPage.tsx",
           "operation": "modify",
-          "description": "Replace the existing brand-logo.dim_200x60.png with the user-provided two-line logo image (frontend/public/assets/two line logo resized.png). This is a direct file replacement with no modifications, compression, or re-encoding applied to preserve exact visual fidelity including dimensions, colors, and clarity."
+          "description": "Remove the ContactInquiryForm component import and usage. Replace the form section with a placeholder div that will contain the Tally.so embed in REQ-2. Maintain the existing hero section with Mail, Phone, and MapPin contact info cards. Keep the page layout structure and amber/orange gradient theme consistent."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Integrate Tally.so form embed in the Contact Us page using either the form URL or embed code provided by the user",
+      "acceptanceCriteria": [
+        "The Tally form is displayed in the same area where ContactInquiryForm was previously located",
+        "The Tally form maintains the existing page layout and styling consistency",
+        "The form is responsive and works on both desktop and mobile views"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "operation": "create",
+          "description": "Create a new React component that embeds a Tally.so form using either an iframe with the form URL or by injecting the Tally embed script. The component should accept the Tally form URL or embed code as a prop. Ensure the iframe is responsive with appropriate width and height styling that matches the previous form dimensions. Include loading states and error boundaries for robustness."
         },
         {
-          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "path": "frontend/src/pages/ContactPage.tsx",
           "operation": "modify",
-          "description": "Verify that the header navigation correctly references and displays the logo from /assets/generated/brand-logo.dim_200x60.png. Ensure the img element uses appropriate attributes to prevent browser-side resizing or compression. Confirm logo displays correctly in both desktop and mobile navigation contexts without any CSS transforms or filters that might alter its appearance."
+          "description": "Import and render the TallyFormEmbed component in the form section area where ContactInquiryForm was previously located. Pass the Tally form URL or embed code as a prop (the actual URL/code will be provided by the user during implementation). Ensure the embedded form maintains the same spacing, container width (max-w-2xl), and positioning as the previous form. Keep the scroll reference functionality intact if needed."
         }
       ]
     }

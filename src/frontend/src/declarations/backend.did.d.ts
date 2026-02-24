@@ -10,22 +10,6 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface ContactInquiry {
-  'id' : bigint,
-  'status' : Status,
-  'name' : string,
-  'cityState' : string,
-  'email' : string,
-  'grade' : Grade,
-  'message' : string,
-  'timestamp' : Timestamp,
-  'phone' : string,
-  'preferredContactMethod' : ContactMethod,
-  'whoIsFilling' : WhoIsFilling,
-}
-export type ContactMethod = { 'both' : null } |
-  { 'email' : null } |
-  { 'phone' : null };
 export interface CounselingSessionBooking {
   'id' : bigint,
   'status' : Status,
@@ -72,10 +56,6 @@ export type WhoIsFilling = { 'student' : null } |
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
-  'filterContactInquiriesByTimestamp' : ActorMethod<
-    [Timestamp, Timestamp],
-    Array<ContactInquiry>
-  >,
   'filterCounselingSessionBookingsByTimestamp' : ActorMethod<
     [Timestamp, Timestamp],
     Array<CounselingSessionBooking>
@@ -84,7 +64,6 @@ export interface _SERVICE {
     [Timestamp, Timestamp],
     Array<PsychometricTestBooking>
   >,
-  'getAllContactInquiries' : ActorMethod<[], Array<ContactInquiry>>,
   'getAllCounselingSessionBookings' : ActorMethod<
     [],
     Array<CounselingSessionBooking>
@@ -96,7 +75,6 @@ export interface _SERVICE {
   'getBookingsWithinDays' : ActorMethod<[bigint], bigint>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
-  'getContactInquiry' : ActorMethod<[bigint], ContactInquiry>,
   'getCounselingSessionBooking' : ActorMethod<
     [bigint],
     CounselingSessionBooking
@@ -106,19 +84,6 @@ export interface _SERVICE {
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
-  'submitContactInquiry' : ActorMethod<
-    [
-      string,
-      WhoIsFilling,
-      Grade,
-      string,
-      string,
-      string,
-      ContactMethod,
-      string,
-    ],
-    bigint
-  >,
   'submitCounselingSessionBooking' : ActorMethod<
     [
       string,

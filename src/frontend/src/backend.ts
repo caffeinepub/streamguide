@@ -118,26 +118,8 @@ export interface CounselingSessionBooking {
     phone: string;
     whoIsFilling: WhoIsFilling;
 }
-export interface ContactInquiry {
-    id: bigint;
-    status: Status;
-    name: string;
-    cityState: string;
-    email: string;
-    grade: Grade;
-    message: string;
-    timestamp: Timestamp;
-    phone: string;
-    preferredContactMethod: ContactMethod;
-    whoIsFilling: WhoIsFilling;
-}
 export interface UserProfile {
     name: string;
-}
-export enum ContactMethod {
-    both = "both",
-    email = "email",
-    phone = "phone"
 }
 export enum Grade {
     ten = "ten",
@@ -165,28 +147,24 @@ export enum WhoIsFilling {
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
-    filterContactInquiriesByTimestamp(startTime: Timestamp, endTime: Timestamp): Promise<Array<ContactInquiry>>;
     filterCounselingSessionBookingsByTimestamp(startTime: Timestamp, endTime: Timestamp): Promise<Array<CounselingSessionBooking>>;
     filterPsychometricTestBookingsByTimestamp(startTime: Timestamp, endTime: Timestamp): Promise<Array<PsychometricTestBooking>>;
-    getAllContactInquiries(): Promise<Array<ContactInquiry>>;
     getAllCounselingSessionBookings(): Promise<Array<CounselingSessionBooking>>;
     getAllPsychometricTestBookings(): Promise<Array<PsychometricTestBooking>>;
     getBookingsWithinDays(days: bigint): Promise<bigint>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
-    getContactInquiry(id: bigint): Promise<ContactInquiry>;
     getCounselingSessionBooking(id: bigint): Promise<CounselingSessionBooking>;
     getNewBookingsCount(): Promise<bigint>;
     getPsychometricTestBooking(id: bigint): Promise<PsychometricTestBooking>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
-    submitContactInquiry(name: string, whoIsFilling: WhoIsFilling, grade: Grade, cityState: string, email: string, phone: string, preferredContactMethod: ContactMethod, message: string): Promise<bigint>;
     submitCounselingSessionBooking(name: string, whoIsFilling: WhoIsFilling, grade: Grade, email: string, phone: string, cityState: string, preferredDate: string, preferredTimeWindow: string, preferredMode: PreferredMode, notes: string): Promise<bigint>;
     submitPsychometricTestBooking(name: string, grade: Grade, email: string, phone: string, cityState: string, preferredDate: string, preferredTimeWindow: string, notes: string): Promise<bigint>;
     updateStatus(type: string, id: bigint, newStatus: Status): Promise<void>;
 }
-import type { ContactInquiry as _ContactInquiry, ContactMethod as _ContactMethod, CounselingSessionBooking as _CounselingSessionBooking, Grade as _Grade, PreferredMode as _PreferredMode, PsychometricTestBooking as _PsychometricTestBooking, Status as _Status, Timestamp as _Timestamp, UserProfile as _UserProfile, UserRole as _UserRole, WhoIsFilling as _WhoIsFilling } from "./declarations/backend.did.d.ts";
+import type { CounselingSessionBooking as _CounselingSessionBooking, Grade as _Grade, PreferredMode as _PreferredMode, PsychometricTestBooking as _PsychometricTestBooking, Status as _Status, Timestamp as _Timestamp, UserProfile as _UserProfile, UserRole as _UserRole, WhoIsFilling as _WhoIsFilling } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
@@ -217,88 +195,60 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async filterContactInquiriesByTimestamp(arg0: Timestamp, arg1: Timestamp): Promise<Array<ContactInquiry>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.filterContactInquiriesByTimestamp(arg0, arg1);
-                return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.filterContactInquiriesByTimestamp(arg0, arg1);
-            return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
-        }
-    }
     async filterCounselingSessionBookingsByTimestamp(arg0: Timestamp, arg1: Timestamp): Promise<Array<CounselingSessionBooking>> {
         if (this.processError) {
             try {
                 const result = await this.actor.filterCounselingSessionBookingsByTimestamp(arg0, arg1);
-                return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
+                return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.filterCounselingSessionBookingsByTimestamp(arg0, arg1);
-            return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
+            return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
         }
     }
     async filterPsychometricTestBookingsByTimestamp(arg0: Timestamp, arg1: Timestamp): Promise<Array<PsychometricTestBooking>> {
         if (this.processError) {
             try {
                 const result = await this.actor.filterPsychometricTestBookingsByTimestamp(arg0, arg1);
-                return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.filterPsychometricTestBookingsByTimestamp(arg0, arg1);
-            return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
-        }
-    }
-    async getAllContactInquiries(): Promise<Array<ContactInquiry>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getAllContactInquiries();
-                return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.getAllContactInquiries();
-            return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
-        }
-    }
-    async getAllCounselingSessionBookings(): Promise<Array<CounselingSessionBooking>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getAllCounselingSessionBookings();
                 return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getAllCounselingSessionBookings();
+            const result = await this.actor.filterPsychometricTestBookingsByTimestamp(arg0, arg1);
             return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getAllCounselingSessionBookings(): Promise<Array<CounselingSessionBooking>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllCounselingSessionBookings();
+                return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllCounselingSessionBookings();
+            return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
         }
     }
     async getAllPsychometricTestBookings(): Promise<Array<PsychometricTestBooking>> {
         if (this.processError) {
             try {
                 const result = await this.actor.getAllPsychometricTestBookings();
-                return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
+                return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getAllPsychometricTestBookings();
-            return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
+            return from_candid_vec_n14(this._uploadFile, this._downloadFile, result);
         }
     }
     async getBookingsWithinDays(arg0: bigint): Promise<bigint> {
@@ -319,56 +269,42 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getCallerUserProfile();
-                return from_candid_opt_n22(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n17(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getCallerUserProfile();
-            return from_candid_opt_n22(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n17(this._uploadFile, this._downloadFile, result);
         }
     }
     async getCallerUserRole(): Promise<UserRole> {
         if (this.processError) {
             try {
                 const result = await this.actor.getCallerUserRole();
-                return from_candid_UserRole_n23(this._uploadFile, this._downloadFile, result);
+                return from_candid_UserRole_n18(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getCallerUserRole();
-            return from_candid_UserRole_n23(this._uploadFile, this._downloadFile, result);
-        }
-    }
-    async getContactInquiry(arg0: bigint): Promise<ContactInquiry> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getContactInquiry(arg0);
-                return from_candid_ContactInquiry_n4(this._uploadFile, this._downloadFile, result);
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.getContactInquiry(arg0);
-            return from_candid_ContactInquiry_n4(this._uploadFile, this._downloadFile, result);
+            return from_candid_UserRole_n18(this._uploadFile, this._downloadFile, result);
         }
     }
     async getCounselingSessionBooking(arg0: bigint): Promise<CounselingSessionBooking> {
         if (this.processError) {
             try {
                 const result = await this.actor.getCounselingSessionBooking(arg0);
-                return from_candid_CounselingSessionBooking_n15(this._uploadFile, this._downloadFile, result);
+                return from_candid_CounselingSessionBooking_n4(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getCounselingSessionBooking(arg0);
-            return from_candid_CounselingSessionBooking_n15(this._uploadFile, this._downloadFile, result);
+            return from_candid_CounselingSessionBooking_n4(this._uploadFile, this._downloadFile, result);
         }
     }
     async getNewBookingsCount(): Promise<bigint> {
@@ -389,28 +325,28 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getPsychometricTestBooking(arg0);
-                return from_candid_PsychometricTestBooking_n20(this._uploadFile, this._downloadFile, result);
+                return from_candid_PsychometricTestBooking_n15(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getPsychometricTestBooking(arg0);
-            return from_candid_PsychometricTestBooking_n20(this._uploadFile, this._downloadFile, result);
+            return from_candid_PsychometricTestBooking_n15(this._uploadFile, this._downloadFile, result);
         }
     }
     async getUserProfile(arg0: Principal): Promise<UserProfile | null> {
         if (this.processError) {
             try {
                 const result = await this.actor.getUserProfile(arg0);
-                return from_candid_opt_n22(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n17(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getUserProfile(arg0);
-            return from_candid_opt_n22(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n17(this._uploadFile, this._downloadFile, result);
         }
     }
     async isCallerAdmin(): Promise<boolean> {
@@ -441,139 +377,74 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async submitContactInquiry(arg0: string, arg1: WhoIsFilling, arg2: Grade, arg3: string, arg4: string, arg5: string, arg6: ContactMethod, arg7: string): Promise<bigint> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.submitContactInquiry(arg0, to_candid_WhoIsFilling_n25(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, to_candid_ContactMethod_n29(this._uploadFile, this._downloadFile, arg6), arg7);
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.submitContactInquiry(arg0, to_candid_WhoIsFilling_n25(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, to_candid_ContactMethod_n29(this._uploadFile, this._downloadFile, arg6), arg7);
-            return result;
-        }
-    }
     async submitCounselingSessionBooking(arg0: string, arg1: WhoIsFilling, arg2: Grade, arg3: string, arg4: string, arg5: string, arg6: string, arg7: string, arg8: PreferredMode, arg9: string): Promise<bigint> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitCounselingSessionBooking(arg0, to_candid_WhoIsFilling_n25(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, to_candid_PreferredMode_n31(this._uploadFile, this._downloadFile, arg8), arg9);
+                const result = await this.actor.submitCounselingSessionBooking(arg0, to_candid_WhoIsFilling_n20(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n22(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, to_candid_PreferredMode_n24(this._uploadFile, this._downloadFile, arg8), arg9);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitCounselingSessionBooking(arg0, to_candid_WhoIsFilling_n25(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, to_candid_PreferredMode_n31(this._uploadFile, this._downloadFile, arg8), arg9);
+            const result = await this.actor.submitCounselingSessionBooking(arg0, to_candid_WhoIsFilling_n20(this._uploadFile, this._downloadFile, arg1), to_candid_Grade_n22(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, to_candid_PreferredMode_n24(this._uploadFile, this._downloadFile, arg8), arg9);
             return result;
         }
     }
     async submitPsychometricTestBooking(arg0: string, arg1: Grade, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string, arg7: string): Promise<bigint> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitPsychometricTestBooking(arg0, to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, arg5, arg6, arg7);
+                const result = await this.actor.submitPsychometricTestBooking(arg0, to_candid_Grade_n22(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, arg5, arg6, arg7);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitPsychometricTestBooking(arg0, to_candid_Grade_n27(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, arg5, arg6, arg7);
+            const result = await this.actor.submitPsychometricTestBooking(arg0, to_candid_Grade_n22(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, arg5, arg6, arg7);
             return result;
         }
     }
     async updateStatus(arg0: string, arg1: bigint, arg2: Status): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.updateStatus(arg0, arg1, to_candid_Status_n33(this._uploadFile, this._downloadFile, arg2));
+                const result = await this.actor.updateStatus(arg0, arg1, to_candid_Status_n26(this._uploadFile, this._downloadFile, arg2));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.updateStatus(arg0, arg1, to_candid_Status_n33(this._uploadFile, this._downloadFile, arg2));
+            const result = await this.actor.updateStatus(arg0, arg1, to_candid_Status_n26(this._uploadFile, this._downloadFile, arg2));
             return result;
         }
     }
 }
-function from_candid_ContactInquiry_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _ContactInquiry): ContactInquiry {
+function from_candid_CounselingSessionBooking_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _CounselingSessionBooking): CounselingSessionBooking {
     return from_candid_record_n5(_uploadFile, _downloadFile, value);
-}
-function from_candid_ContactMethod_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _ContactMethod): ContactMethod {
-    return from_candid_variant_n11(_uploadFile, _downloadFile, value);
-}
-function from_candid_CounselingSessionBooking_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _CounselingSessionBooking): CounselingSessionBooking {
-    return from_candid_record_n16(_uploadFile, _downloadFile, value);
 }
 function from_candid_Grade_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Grade): Grade {
     return from_candid_variant_n9(_uploadFile, _downloadFile, value);
 }
-function from_candid_PreferredMode_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _PreferredMode): PreferredMode {
-    return from_candid_variant_n18(_uploadFile, _downloadFile, value);
+function from_candid_PreferredMode_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _PreferredMode): PreferredMode {
+    return from_candid_variant_n11(_uploadFile, _downloadFile, value);
 }
-function from_candid_PsychometricTestBooking_n20(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _PsychometricTestBooking): PsychometricTestBooking {
-    return from_candid_record_n21(_uploadFile, _downloadFile, value);
+function from_candid_PsychometricTestBooking_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _PsychometricTestBooking): PsychometricTestBooking {
+    return from_candid_record_n16(_uploadFile, _downloadFile, value);
 }
 function from_candid_Status_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Status): Status {
     return from_candid_variant_n7(_uploadFile, _downloadFile, value);
 }
-function from_candid_UserRole_n23(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
-    return from_candid_variant_n24(_uploadFile, _downloadFile, value);
+function from_candid_UserRole_n18(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
+    return from_candid_variant_n19(_uploadFile, _downloadFile, value);
 }
 function from_candid_WhoIsFilling_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _WhoIsFilling): WhoIsFilling {
     return from_candid_variant_n13(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n22(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+function from_candid_opt_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
     return value.length === 0 ? null : value[0];
 }
 function from_candid_record_n16(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
-    id: bigint;
-    status: _Status;
-    preferredTimeWindow: string;
-    name: string;
-    cityState: string;
-    email: string;
-    grade: _Grade;
-    preferredDate: string;
-    notes: string;
-    preferredMode: _PreferredMode;
-    timestamp: _Timestamp;
-    phone: string;
-    whoIsFilling: _WhoIsFilling;
-}): {
-    id: bigint;
-    status: Status;
-    preferredTimeWindow: string;
-    name: string;
-    cityState: string;
-    email: string;
-    grade: Grade;
-    preferredDate: string;
-    notes: string;
-    preferredMode: PreferredMode;
-    timestamp: Timestamp;
-    phone: string;
-    whoIsFilling: WhoIsFilling;
-} {
-    return {
-        id: value.id,
-        status: from_candid_Status_n6(_uploadFile, _downloadFile, value.status),
-        preferredTimeWindow: value.preferredTimeWindow,
-        name: value.name,
-        cityState: value.cityState,
-        email: value.email,
-        grade: from_candid_Grade_n8(_uploadFile, _downloadFile, value.grade),
-        preferredDate: value.preferredDate,
-        notes: value.notes,
-        preferredMode: from_candid_PreferredMode_n17(_uploadFile, _downloadFile, value.preferredMode),
-        timestamp: value.timestamp,
-        phone: value.phone,
-        whoIsFilling: from_candid_WhoIsFilling_n12(_uploadFile, _downloadFile, value.whoIsFilling)
-    };
-}
-function from_candid_record_n21(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: bigint;
     status: _Status;
     preferredTimeWindow: string;
@@ -615,50 +486,54 @@ function from_candid_record_n21(_uploadFile: (file: ExternalBlob) => Promise<Uin
 function from_candid_record_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: bigint;
     status: _Status;
+    preferredTimeWindow: string;
     name: string;
     cityState: string;
     email: string;
     grade: _Grade;
-    message: string;
+    preferredDate: string;
+    notes: string;
+    preferredMode: _PreferredMode;
     timestamp: _Timestamp;
     phone: string;
-    preferredContactMethod: _ContactMethod;
     whoIsFilling: _WhoIsFilling;
 }): {
     id: bigint;
     status: Status;
+    preferredTimeWindow: string;
     name: string;
     cityState: string;
     email: string;
     grade: Grade;
-    message: string;
+    preferredDate: string;
+    notes: string;
+    preferredMode: PreferredMode;
     timestamp: Timestamp;
     phone: string;
-    preferredContactMethod: ContactMethod;
     whoIsFilling: WhoIsFilling;
 } {
     return {
         id: value.id,
         status: from_candid_Status_n6(_uploadFile, _downloadFile, value.status),
+        preferredTimeWindow: value.preferredTimeWindow,
         name: value.name,
         cityState: value.cityState,
         email: value.email,
         grade: from_candid_Grade_n8(_uploadFile, _downloadFile, value.grade),
-        message: value.message,
+        preferredDate: value.preferredDate,
+        notes: value.notes,
+        preferredMode: from_candid_PreferredMode_n10(_uploadFile, _downloadFile, value.preferredMode),
         timestamp: value.timestamp,
         phone: value.phone,
-        preferredContactMethod: from_candid_ContactMethod_n10(_uploadFile, _downloadFile, value.preferredContactMethod),
         whoIsFilling: from_candid_WhoIsFilling_n12(_uploadFile, _downloadFile, value.whoIsFilling)
     };
 }
 function from_candid_variant_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
-    both: null;
+    in_person: null;
 } | {
-    email: null;
-} | {
-    phone: null;
-}): ContactMethod {
-    return "both" in value ? ContactMethod.both : "email" in value ? ContactMethod.email : "phone" in value ? ContactMethod.phone : value;
+    online: null;
+}): PreferredMode {
+    return "in_person" in value ? PreferredMode.in_person : "online" in value ? PreferredMode.online : value;
 }
 function from_candid_variant_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     student: null;
@@ -667,14 +542,7 @@ function from_candid_variant_n13(_uploadFile: (file: ExternalBlob) => Promise<Ui
 }): WhoIsFilling {
     return "student" in value ? WhoIsFilling.student : "parent" in value ? WhoIsFilling.parent : value;
 }
-function from_candid_variant_n18(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
-    in_person: null;
-} | {
-    online: null;
-}): PreferredMode {
-    return "in_person" in value ? PreferredMode.in_person : "online" in value ? PreferredMode.online : value;
-}
-function from_candid_variant_n24(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function from_candid_variant_n19(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     admin: null;
 } | {
     user: null;
@@ -701,32 +569,26 @@ function from_candid_variant_n9(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }): Grade {
     return "ten" in value ? Grade.ten : "nine" in value ? Grade.nine : "eight" in value ? Grade.eight : value;
 }
-function from_candid_vec_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_CounselingSessionBooking>): Array<CounselingSessionBooking> {
-    return value.map((x)=>from_candid_CounselingSessionBooking_n15(_uploadFile, _downloadFile, x));
+function from_candid_vec_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_PsychometricTestBooking>): Array<PsychometricTestBooking> {
+    return value.map((x)=>from_candid_PsychometricTestBooking_n15(_uploadFile, _downloadFile, x));
 }
-function from_candid_vec_n19(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_PsychometricTestBooking>): Array<PsychometricTestBooking> {
-    return value.map((x)=>from_candid_PsychometricTestBooking_n20(_uploadFile, _downloadFile, x));
+function from_candid_vec_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_CounselingSessionBooking>): Array<CounselingSessionBooking> {
+    return value.map((x)=>from_candid_CounselingSessionBooking_n4(_uploadFile, _downloadFile, x));
 }
-function from_candid_vec_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_ContactInquiry>): Array<ContactInquiry> {
-    return value.map((x)=>from_candid_ContactInquiry_n4(_uploadFile, _downloadFile, x));
+function to_candid_Grade_n22(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Grade): _Grade {
+    return to_candid_variant_n23(_uploadFile, _downloadFile, value);
 }
-function to_candid_ContactMethod_n29(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ContactMethod): _ContactMethod {
-    return to_candid_variant_n30(_uploadFile, _downloadFile, value);
+function to_candid_PreferredMode_n24(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PreferredMode): _PreferredMode {
+    return to_candid_variant_n25(_uploadFile, _downloadFile, value);
 }
-function to_candid_Grade_n27(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Grade): _Grade {
-    return to_candid_variant_n28(_uploadFile, _downloadFile, value);
-}
-function to_candid_PreferredMode_n31(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PreferredMode): _PreferredMode {
-    return to_candid_variant_n32(_uploadFile, _downloadFile, value);
-}
-function to_candid_Status_n33(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Status): _Status {
-    return to_candid_variant_n34(_uploadFile, _downloadFile, value);
+function to_candid_Status_n26(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Status): _Status {
+    return to_candid_variant_n27(_uploadFile, _downloadFile, value);
 }
 function to_candid_UserRole_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
     return to_candid_variant_n2(_uploadFile, _downloadFile, value);
 }
-function to_candid_WhoIsFilling_n25(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: WhoIsFilling): _WhoIsFilling {
-    return to_candid_variant_n26(_uploadFile, _downloadFile, value);
+function to_candid_WhoIsFilling_n20(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: WhoIsFilling): _WhoIsFilling {
+    return to_candid_variant_n21(_uploadFile, _downloadFile, value);
 }
 function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
     admin: null;
@@ -743,7 +605,7 @@ function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8
         guest: null
     } : value;
 }
-function to_candid_variant_n26(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: WhoIsFilling): {
+function to_candid_variant_n21(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: WhoIsFilling): {
     student: null;
 } | {
     parent: null;
@@ -754,7 +616,7 @@ function to_candid_variant_n26(_uploadFile: (file: ExternalBlob) => Promise<Uint
         parent: null
     } : value;
 }
-function to_candid_variant_n28(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Grade): {
+function to_candid_variant_n23(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Grade): {
     ten: null;
 } | {
     nine: null;
@@ -769,22 +631,7 @@ function to_candid_variant_n28(_uploadFile: (file: ExternalBlob) => Promise<Uint
         eight: null
     } : value;
 }
-function to_candid_variant_n30(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ContactMethod): {
-    both: null;
-} | {
-    email: null;
-} | {
-    phone: null;
-} {
-    return value == ContactMethod.both ? {
-        both: null
-    } : value == ContactMethod.email ? {
-        email: null
-    } : value == ContactMethod.phone ? {
-        phone: null
-    } : value;
-}
-function to_candid_variant_n32(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PreferredMode): {
+function to_candid_variant_n25(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PreferredMode): {
     in_person: null;
 } | {
     online: null;
@@ -795,7 +642,7 @@ function to_candid_variant_n32(_uploadFile: (file: ExternalBlob) => Promise<Uint
         online: null
     } : value;
 }
-function to_candid_variant_n34(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Status): {
+function to_candid_variant_n27(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Status): {
     new: null;
 } | {
     closed: null;

@@ -1,34 +1,63 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T10:36:19.871Z",
+  "generatedAt": "2026-02-24T07:36:34.249Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-15",
-        "summary": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
+        "id": "REQ-1",
+        "summary": "Remove the existing ContactInquiryForm component from the Contact Us page",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/brand-logo.dim_200x60.png",
-          "frontend/src/components/layout/SiteLayout.tsx"
+          "frontend/src/pages/ContactPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/brand-logo.dim_200x60.png"
+          "frontend/src/pages/ContactPage.tsx"
         ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Integrate Tally.so form embed in the Contact Us page using either the form URL or embed code provided by the user",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "frontend/src/pages/ContactPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/forms/TallyFormEmbed.tsx",
+          "frontend/src/pages/ContactPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Remove or deprecate the backend contact inquiry submission endpoint and related types since form submissions will be handled by Tally.so",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/brand-logo.dim_200x60.png",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/forms/ContactInquiryForm.tsx",
+    "frontend/src/components/forms/TallyFormEmbed.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/mutations/useSubmitContactInquiry.ts",
+    "frontend/src/pages/ContactPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

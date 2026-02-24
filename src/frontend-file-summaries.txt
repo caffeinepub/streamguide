@@ -1,10 +1,10 @@
 {
   "frontend/src/App.tsx": "Main application component with TanStack Router setup, defining routes for Home, Psychometric Test, Counseling, and Contact pages with SiteLayout wrapper.",
-  "frontend/src/components/layout/SiteLayout.tsx": "Reusable layout component with sticky header navigation featuring the brand logo image, mobile menu with logo display, footer, and WhatsAppFloatingButton component that appears fixed at bottom-right across all routes.",
+  "frontend/src/components/layout/SiteLayout.tsx": "Reusable layout component with sticky header navigation featuring \"The Smart Choice\" text branding (no logo image), mobile menu, footer, WhatsAppFloatingButton component, and proper responsive styling with amber/orange theme colors.",
   "frontend/src/pages/HomePage.tsx": "Homepage with hero section, services overview, why choose us section featuring \"The Smart Choice\" branding, and CTA with warm amber/orange gradient design.",
   "frontend/src/pages/PsychometricTestPage.tsx": "Psychometric test service page with detailed information, how it works section, and integrated booking form; now displays pricing (MRP Rs. 1249 strikethrough, Intro offer Rs. 749 emphasized) in the hero section above the CTA button.",
   "frontend/src/pages/CounselingPage.tsx": "One-on-one counseling service page explaining session details, topics covered, online/in-person modes, and integrated booking form; updated deprecated Tailwind classes from flex-shrink-0 to shrink-0.",
-  "frontend/src/pages/ContactPage.tsx": "Contact page with general inquiry information, contact methods overview, and integrated contact inquiry form.",
+  "frontend/src/pages/ContactPage.tsx": "Contact page with hero section, contact info cards, help topics, and Tally form embed replacing the previous ContactInquiryForm; maintains amber/orange gradient theme and scroll-to-form functionality.",
   "frontend/src/components/forms/ContactInquiryForm.tsx": "Contact inquiry form with validation for name, grade, contact details, preferred method, and message; integrates with backend mutation and shows success/error states.",
   "frontend/src/components/forms/PsychometricTestBookingForm.tsx": "Psychometric test booking form with validation for student details, preferred date/time, and notes; now includes a pricing callout banner at the top of the form showing MRP Rs. 1249 (strikethrough) and Intro offer Rs. 749 (emphasized).",
   "frontend/src/components/forms/CounselingBookingForm.tsx": "Counseling session booking form with validation for student/parent details, session mode (online/in-person), date/time preferences, and backend integration.",
@@ -16,5 +16,6 @@
   "frontend/tailwind.config.js": "Tailwind configuration with Inter font family and extended theme matching the warm color palette.",
   "frontend/src/constants/brand.ts": "Centralized brand constants file exporting BRAND_NAME as \"The Smart Choice\" and lowercase variant for consistent branding across the application.",
   "frontend/index.html": "HTML entry point with document title updated to \"The Smart Choice\".",
-  "frontend/src/components/WhatsAppFloatingButton.tsx": "Floating action button component that opens WhatsApp Click-to-Chat with phone number 919811575100 and prefilled message \"Hi, I'd like to know more about your services.\"; uses WhatsApp brand green color (#25D366) with hover effects and accessibility features."
+  "frontend/src/components/WhatsAppFloatingButton.tsx": "Floating action button component that opens WhatsApp Click-to-Chat with phone number 919811575100 and prefilled message \"Hi, I'd like to know more about your services.\"; uses WhatsApp brand green color (#25D366) with hover effects and accessibility features.",
+  "frontend/src/components/forms/TallyFormEmbed.tsx": "Reusable component that embeds Tally.so forms via iframe (for URLs) or direct injection (for embed codes), with configurable height and responsive styling."
 }

@@ -1,35 +1,21 @@
 import Map "mo:core/Map";
 import Array "mo:core/Array";
-import Order "mo:core/Order";
 import Time "mo:core/Time";
 import Runtime "mo:core/Runtime";
 import Nat "mo:core/Nat";
 import Principal "mo:core/Principal";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
+import Migration "migration";
 
+(with migration = Migration.run)
 actor {
   type Timestamp = Nat;
   type Status = { #new; #reviewed; #closed };
 
   public type Grade = { #eight; #nine; #ten };
   public type WhoIsFilling = { #student; #parent };
-  public type ContactMethod = { #email; #phone; #both };
   public type PreferredMode = { #online; #in_person };
-
-  public type ContactInquiry = {
-    id : Nat;
-    name : Text;
-    whoIsFilling : WhoIsFilling;
-    grade : Grade;
-    cityState : Text;
-    email : Text;
-    phone : Text;
-    preferredContactMethod : ContactMethod;
-    message : Text;
-    timestamp : Timestamp;
-    status : Status;
-  };
 
   public type PsychometricTestBooking = {
     id : Nat;
@@ -65,7 +51,6 @@ actor {
     name : Text;
   };
 
-  let contactInquiries = Map.empty<Nat, ContactInquiry>();
   let psychometricTestBookings = Map.empty<Nat, PsychometricTestBooking>();
   let counselingSessionBookings = Map.empty<Nat, CounselingSessionBooking>();
   let userProfiles = Map.empty<Principal, UserProfile>();
@@ -102,52 +87,6 @@ actor {
       Runtime.trap("Unauthorized: Only users can save profiles");
     };
     userProfiles.add(caller, profile);
-  };
-
-  // Contact Inquiry Functions
-  public shared ({ caller }) func submitContactInquiry(
-    name : Text,
-    whoIsFilling : WhoIsFilling,
-    grade : Grade,
-    cityState : Text,
-    email : Text,
-    phone : Text,
-    preferredContactMethod : ContactMethod,
-    message : Text,
-  ) : async Nat {
-    let id = generateId();
-    let inquiry : ContactInquiry = {
-      id;
-      name;
-      whoIsFilling;
-      grade;
-      cityState;
-      email;
-      phone;
-      preferredContactMethod;
-      message;
-      timestamp = Time.now().toNat();
-      status = #new;
-    };
-    contactInquiries.add(id, inquiry);
-    id;
-  };
-
-  public query ({ caller }) func getContactInquiry(id : Nat) : async ContactInquiry {
-    if (not (AccessControl.isAdmin(accessControlState, caller))) {
-      Runtime.trap("Unauthorized: Only admins can view contact inquiries");
-    };
-    switch (contactInquiries.get(id)) {
-      case (null) { Runtime.trap("Contact inquiry does not exist") };
-      case (?inquiry) { inquiry };
-    };
-  };
-
-  public query ({ caller }) func getAllContactInquiries() : async [ContactInquiry] {
-    if (not (AccessControl.isAdmin(accessControlState, caller))) {
-      Runtime.trap("Unauthorized: Only admins can view all contact inquiries");
-    };
-    contactInquiries.values().toArray();
   };
 
   // Psychometric Test Booking Functions
@@ -252,27 +191,6 @@ actor {
       Runtime.trap("Unauthorized: Only admins can update statuses");
     };
     switch (type_) {
-      case ("contactInquiry") {
-        switch (contactInquiries.get(id)) {
-          case (null) { Runtime.trap("Contact inquiry does not exist") };
-          case (?inquiry) {
-            let updatedInquiry : ContactInquiry = {
-              id = inquiry.id;
-              name = inquiry.name;
-              whoIsFilling = inquiry.whoIsFilling;
-              grade = inquiry.grade;
-              cityState = inquiry.cityState;
-              email = inquiry.email;
-              phone = inquiry.phone;
-              preferredContactMethod = inquiry.preferredContactMethod;
-              message = inquiry.message;
-              timestamp = inquiry.timestamp;
-              status = newStatus;
-            };
-            contactInquiries.add(id, updatedInquiry);
-          };
-        };
-      };
       case ("psychometricTestBooking") {
         switch (psychometricTestBookings.get(id)) {
           case (null) { Runtime.trap("Psychometric test booking does not exist") };
@@ -321,15 +239,6 @@ actor {
     };
   };
 
-  public query ({ caller }) func filterContactInquiriesByTimestamp(startTime : Timestamp, endTime : Timestamp) : async [ContactInquiry] {
-    if (not (AccessControl.isAdmin(accessControlState, caller))) {
-      Runtime.trap("Unauthorized: Only admins can filter contact inquiries");
-    };
-    contactInquiries.values().toArray().filter(
-      func(inquiry : ContactInquiry) : Bool { inquiry.timestamp >= startTime and inquiry.timestamp <= endTime }
-    );
-  };
-
   public query ({ caller }) func filterPsychometricTestBookingsByTimestamp(startTime : Timestamp, endTime : Timestamp) : async [PsychometricTestBooking] {
     if (not (AccessControl.isAdmin(accessControlState, caller))) {
       Runtime.trap("Unauthorized: Only admins can filter psychometric test bookings");
@@ -352,9 +261,6 @@ actor {
     if (not (AccessControl.isAdmin(accessControlState, caller))) {
       Runtime.trap("Unauthorized: Only admins can view booking counts");
     };
-    let newContactInquiries = contactInquiries.values().toArray().filter(
-      func(inquiry : ContactInquiry) : Bool { inquiry.status == #new }
-    ).size();
 
     let newPsychometricTestBookings = psychometricTestBookings.values().toArray().filter(
       func(booking : PsychometricTestBooking) : Bool { booking.status == #new }
@@ -364,7 +270,7 @@ actor {
       func(booking : CounselingSessionBooking) : Bool { booking.status == #new }
     ).size();
 
-    newContactInquiries + newPsychometricTestBookings + newCounselingSessionBookings;
+    newPsychometricTestBookings + newCounselingSessionBookings;
   };
 
   public query ({ caller }) func getBookingsWithinDays(days : Nat) : async Nat {
@@ -375,10 +281,6 @@ actor {
     let dayRange = days * 24 * 60 * 60 * 1_000_000_000;
     let startTime = if (currentTime > dayRange) { currentTime - dayRange } else { 0 };
 
-    let contactInquiriesCount = contactInquiries.values().toArray().filter(
-      func(inquiry : ContactInquiry) : Bool { inquiry.timestamp >= startTime }
-    ).size();
-
     let psychometricTestBookingsCount = psychometricTestBookings.values().toArray().filter(
       func(booking : PsychometricTestBooking) : Bool { booking.timestamp >= startTime }
     ).size();
@@ -387,6 +289,6 @@ actor {
       func(booking : CounselingSessionBooking) : Bool { booking.timestamp >= startTime }
     ).size();
 
-    contactInquiriesCount + psychometricTestBookingsCount + counselingSessionBookingsCount;
+    psychometricTestBookingsCount + counselingSessionBookingsCount;
   };
 };

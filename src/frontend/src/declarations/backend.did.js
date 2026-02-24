@@ -24,31 +24,13 @@ export const Grade = IDL.Variant({
   'nine' : IDL.Null,
   'eight' : IDL.Null,
 });
-export const ContactMethod = IDL.Variant({
-  'both' : IDL.Null,
-  'email' : IDL.Null,
-  'phone' : IDL.Null,
+export const PreferredMode = IDL.Variant({
+  'in_person' : IDL.Null,
+  'online' : IDL.Null,
 });
 export const WhoIsFilling = IDL.Variant({
   'student' : IDL.Null,
   'parent' : IDL.Null,
-});
-export const ContactInquiry = IDL.Record({
-  'id' : IDL.Nat,
-  'status' : Status,
-  'name' : IDL.Text,
-  'cityState' : IDL.Text,
-  'email' : IDL.Text,
-  'grade' : Grade,
-  'message' : IDL.Text,
-  'timestamp' : Timestamp,
-  'phone' : IDL.Text,
-  'preferredContactMethod' : ContactMethod,
-  'whoIsFilling' : WhoIsFilling,
-});
-export const PreferredMode = IDL.Variant({
-  'in_person' : IDL.Null,
-  'online' : IDL.Null,
 });
 export const CounselingSessionBooking = IDL.Record({
   'id' : IDL.Nat,
@@ -83,11 +65,6 @@ export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-  'filterContactInquiriesByTimestamp' : IDL.Func(
-      [Timestamp, Timestamp],
-      [IDL.Vec(ContactInquiry)],
-      ['query'],
-    ),
   'filterCounselingSessionBookingsByTimestamp' : IDL.Func(
       [Timestamp, Timestamp],
       [IDL.Vec(CounselingSessionBooking)],
@@ -98,7 +75,6 @@ export const idlService = IDL.Service({
       [IDL.Vec(PsychometricTestBooking)],
       ['query'],
     ),
-  'getAllContactInquiries' : IDL.Func([], [IDL.Vec(ContactInquiry)], ['query']),
   'getAllCounselingSessionBookings' : IDL.Func(
       [],
       [IDL.Vec(CounselingSessionBooking)],
@@ -112,7 +88,6 @@ export const idlService = IDL.Service({
   'getBookingsWithinDays' : IDL.Func([IDL.Nat], [IDL.Nat], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
-  'getContactInquiry' : IDL.Func([IDL.Nat], [ContactInquiry], ['query']),
   'getCounselingSessionBooking' : IDL.Func(
       [IDL.Nat],
       [CounselingSessionBooking],
@@ -131,20 +106,6 @@ export const idlService = IDL.Service({
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
-  'submitContactInquiry' : IDL.Func(
-      [
-        IDL.Text,
-        WhoIsFilling,
-        Grade,
-        IDL.Text,
-        IDL.Text,
-        IDL.Text,
-        ContactMethod,
-        IDL.Text,
-      ],
-      [IDL.Nat],
-      [],
-    ),
   'submitCounselingSessionBooking' : IDL.Func(
       [
         IDL.Text,
@@ -197,31 +158,13 @@ export const idlFactory = ({ IDL }) => {
     'nine' : IDL.Null,
     'eight' : IDL.Null,
   });
-  const ContactMethod = IDL.Variant({
-    'both' : IDL.Null,
-    'email' : IDL.Null,
-    'phone' : IDL.Null,
+  const PreferredMode = IDL.Variant({
+    'in_person' : IDL.Null,
+    'online' : IDL.Null,
   });
   const WhoIsFilling = IDL.Variant({
     'student' : IDL.Null,
     'parent' : IDL.Null,
-  });
-  const ContactInquiry = IDL.Record({
-    'id' : IDL.Nat,
-    'status' : Status,
-    'name' : IDL.Text,
-    'cityState' : IDL.Text,
-    'email' : IDL.Text,
-    'grade' : Grade,
-    'message' : IDL.Text,
-    'timestamp' : Timestamp,
-    'phone' : IDL.Text,
-    'preferredContactMethod' : ContactMethod,
-    'whoIsFilling' : WhoIsFilling,
-  });
-  const PreferredMode = IDL.Variant({
-    'in_person' : IDL.Null,
-    'online' : IDL.Null,
   });
   const CounselingSessionBooking = IDL.Record({
     'id' : IDL.Nat,
@@ -256,11 +199,6 @@ export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-    'filterContactInquiriesByTimestamp' : IDL.Func(
-        [Timestamp, Timestamp],
-        [IDL.Vec(ContactInquiry)],
-        ['query'],
-      ),
     'filterCounselingSessionBookingsByTimestamp' : IDL.Func(
         [Timestamp, Timestamp],
         [IDL.Vec(CounselingSessionBooking)],
@@ -269,11 +207,6 @@ export const idlFactory = ({ IDL }) => {
     'filterPsychometricTestBookingsByTimestamp' : IDL.Func(
         [Timestamp, Timestamp],
         [IDL.Vec(PsychometricTestBooking)],
-        ['query'],
-      ),
-    'getAllContactInquiries' : IDL.Func(
-        [],
-        [IDL.Vec(ContactInquiry)],
         ['query'],
       ),
     'getAllCounselingSessionBookings' : IDL.Func(
@@ -289,7 +222,6 @@ export const idlFactory = ({ IDL }) => {
     'getBookingsWithinDays' : IDL.Func([IDL.Nat], [IDL.Nat], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
-    'getContactInquiry' : IDL.Func([IDL.Nat], [ContactInquiry], ['query']),
     'getCounselingSessionBooking' : IDL.Func(
         [IDL.Nat],
         [CounselingSessionBooking],
@@ -308,20 +240,6 @@ export const idlFactory = ({ IDL }) => {
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
-    'submitContactInquiry' : IDL.Func(
-        [
-          IDL.Text,
-          WhoIsFilling,
-          Grade,
-          IDL.Text,
-          IDL.Text,
-          IDL.Text,
-          ContactMethod,
-          IDL.Text,
-        ],
-        [IDL.Nat],
-        [],
-      ),
     'submitCounselingSessionBooking' : IDL.Func(
         [
           IDL.Text,

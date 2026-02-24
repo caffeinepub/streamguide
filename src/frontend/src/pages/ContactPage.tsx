@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
-import ContactInquiryForm from '../components/forms/ContactInquiryForm';
+import TallyFormEmbed from '../components/forms/TallyFormEmbed';
 
 export default function ContactPage() {
   const formRef = useRef<HTMLDivElement>(null);
@@ -8,6 +8,11 @@ export default function ContactPage() {
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  // TODO: Replace this placeholder URL with your actual Tally form URL
+  // Example: 'https://tally.so/r/yourFormId'
+  // Or paste the full embed code from Tally
+  const tallyFormUrl = 'https://tally.so/r/PLACEHOLDER';
 
   return (
     <div className="w-full">
@@ -117,7 +122,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Contact Form Section with Tally Embed */}
       <section ref={formRef} className="py-16 md:py-20 bg-background scroll-mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
@@ -127,7 +132,7 @@ export default function ContactPage() {
                 Fill out the form below and we'll get back to you within 1-2 business days.
               </p>
             </div>
-            <ContactInquiryForm />
+            <TallyFormEmbed formUrlOrEmbedCode={tallyFormUrl} height="700px" />
           </div>
         </div>
       </section>

@@ -2,9 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-existing-brand-logo-dim-200x60-png-with-the-user-uploaded-two-line-logo-image-two-line-logo-resized-png-preserving-its-exact-appearance-without-any-automated-resizing-compression-or-color-modification",
-      "featureTitle": "Replace the existing brand-logo.dim_200x60.png with the user-uploaded two-line logo image (two line logo resized.png), preserving its exact appearance without any automated resizing, compression, or color modification",
-      "files": [],
+      "featureId": "feature-remove-the-existing-contactinquiryform-component-from-the-contact-us-page",
+      "featureTitle": "Remove the existing ContactInquiryForm component from the Contact Us page",
+      "files": [
+        "frontend/src/pages/ContactPage.tsx"
+      ],
       "components": [
         "authorization@4.0.0",
         "core-infrastructure@1.0.2",
@@ -14,7 +16,27 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-15"
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-tally-so-form-embed-in-the-contact-us-page-using-either-the-form-url-or-embed-code-provided-by-the-user",
+      "featureTitle": "Integrate Tally.so form embed in the Contact Us page using either the form URL or embed code provided by the user",
+      "files": [
+        "frontend/src/components/forms/TallyFormEmbed.tsx",
+        "frontend/src/pages/ContactPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
       ],
       "confidence": "high"
     }

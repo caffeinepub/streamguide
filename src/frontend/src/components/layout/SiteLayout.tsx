@@ -28,11 +28,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img
-                src="/assets/generated/brand-logo.dim_200x60.png"
-                alt={BRAND_NAME}
-                className="h-10 sm:h-12 w-auto"
-              />
+              <span className="text-xl sm:text-2xl font-bold text-amber-600 hover:text-amber-700 transition-colors">
+                {BRAND_NAME}
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -63,11 +61,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           {mobileMenuOpen && (
             <nav className="md:hidden py-4 border-t border-border/40">
               <div className="flex items-center justify-center mb-4 pb-4 border-b border-border/40">
-                <img
-                  src="/assets/generated/brand-logo.dim_200x60.png"
-                  alt={BRAND_NAME}
-                  className="h-8 w-auto"
-                />
+                <span className="text-lg font-bold text-amber-600">
+                  {BRAND_NAME}
+                </span>
               </div>
               {navLinks.map((link) => (
                 <button
