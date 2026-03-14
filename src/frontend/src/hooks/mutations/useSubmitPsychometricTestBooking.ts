@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from '../useActor';
-import { Grade } from '../../backend';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Grade } from "../../backend";
+import { useActor } from "../useActor";
 
 interface SubmitPsychometricTestBookingParams {
   name: string;
@@ -19,7 +19,7 @@ export function useSubmitPsychometricTestBooking() {
 
   return useMutation({
     mutationFn: async (params: SubmitPsychometricTestBookingParams) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
 
       const id = await actor.submitPsychometricTestBooking(
         params.name,
@@ -29,13 +29,13 @@ export function useSubmitPsychometricTestBooking() {
         params.cityState,
         params.preferredDate,
         params.preferredTimeWindow,
-        params.notes
+        params.notes,
       );
 
       return id;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['psychometricTestBookings'] });
+      queryClient.invalidateQueries({ queryKey: ["psychometricTestBookings"] });
     },
   });
 }

@@ -1,0 +1,351 @@
+import { BRAND_NAME } from "@/constants/brand";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight, CheckCircle, GraduationCap, Star } from "lucide-react";
+
+function PackagesSection() {
+  const navigate = useNavigate();
+
+  return (
+    <section className="py-16 md:py-20 bg-background" id="programs">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1.5 rounded-full mb-4">
+            <Star className="w-4 h-4" />
+            <span>Special Launch Prices — 50% Off</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Choose Your Smart Choice Program
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Select the program that best suits your needs. All programs are
+            designed specifically for Class 11-12 students.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
+          {/* Card 1: Smart Choice Discovery */}
+          <div
+            className="bg-card border border-border rounded-2xl p-6 flex flex-col"
+            data-ocid="packages.discovery.card"
+          >
+            <div className="mb-4">
+              <h3 className="text-xl font-bold text-foreground mb-1">
+                Smart Choice Discovery
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Understand yourself, discover your path
+              </p>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-3xl font-bold text-foreground">
+                  Rs. 999
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground line-through">
+                  Rs. 1999
+                </span>
+                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
+                  50% Off — Special Launch Price
+                </span>
+              </div>
+            </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-foreground">Career Assessment Test</span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-foreground font-medium">
+                  Personalized 40+ Page Report including:
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm pl-4">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">Detailed Skills Map</span>
+              </li>
+              <li className="flex items-start gap-2 text-sm pl-4">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">Skills Gap Analysis</span>
+              </li>
+              <li className="flex items-start gap-2 text-sm pl-4">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">Personality Analysis</span>
+              </li>
+              <li className="flex items-start gap-2 text-sm pl-4">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Learning Recommendations
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm pl-4">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Most Suitable Career Recommendations
+                </span>
+              </li>
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => navigate({ to: "/psychometric-test" })}
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-amber-700 border-2 border-amber-600 rounded-lg hover:bg-amber-50 transition-all"
+              data-ocid="packages.discovery.learn_more.button"
+            >
+              Learn More
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Card 2: Smart Choice Guidance — Most Popular */}
+          <div
+            className="bg-card border-2 border-amber-500 rounded-2xl p-6 flex flex-col shadow-xl relative"
+            data-ocid="packages.guidance.card"
+          >
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <span className="inline-flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow">
+                <Star className="w-3 h-3 fill-current" />
+                Most Popular
+              </span>
+            </div>
+
+            <div className="mb-4 mt-2">
+              <h3 className="text-xl font-bold text-foreground mb-1">
+                Smart Choice Guidance
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Assessment + Expert Counseling
+              </p>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-3xl font-bold text-amber-600">
+                  Rs. 2999
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground line-through">
+                  Rs. 5999
+                </span>
+                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
+                  50% Off — Special Launch Price
+                </span>
+              </div>
+            </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-foreground font-medium">
+                  Everything in Smart Choice Discovery, plus:
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Individual Counseling Session — 1 session up to 60 minutes
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Takes into account your specific needs and current context
+                </span>
+              </li>
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => navigate({ to: "/counseling" })}
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
+              data-ocid="packages.guidance.learn_more.button"
+            >
+              Learn More
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
+            <a
+              href="https://www.bodhami.com/summary/counselor?id=SameerPopli"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 w-full inline-flex items-center justify-center gap-1.5 text-sm font-medium text-amber-700 hover:text-amber-800 hover:underline transition-colors"
+              data-ocid="packages.guidance.meet_counselor.link"
+            >
+              Meet your Counselor
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Card 3: Smart Choice Mentorship — Coming Soon */}
+          <div
+            className="bg-card border border-dashed border-border rounded-2xl p-6 flex flex-col opacity-80"
+            data-ocid="packages.mentorship.card"
+          >
+            <div className="mb-4">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-xl font-bold text-foreground">
+                  Smart Choice Mentorship Program
+                </h3>
+              </div>
+              <span className="inline-block text-xs bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full font-medium">
+                Coming Soon
+              </span>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-sm text-muted-foreground italic">
+                Pricing to be announced
+              </p>
+            </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Full guidance & support throughout your academic journey from
+                  Class 8 to 12
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Stream and subject selection guidance
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">Careful career planning</span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  Course and college selection
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="text-foreground">Bridging skill gaps</span>
+              </li>
+            </ul>
+
+            <Link
+              to="/contact"
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-muted-foreground border border-border rounded-lg hover:border-amber-300 hover:text-amber-700 transition-all"
+              data-ocid="packages.mentorship.contact.button"
+            >
+              Contact Us for More Details
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function CareerPlanning1112Page() {
+  const whyPoints = [
+    {
+      title: "Clarity at a Critical Juncture",
+      description:
+        "Class 11-12 is when career choices become real. The Smart Choice gives you clarity and confidence with data-backed assessments and personalized guidance.",
+    },
+    {
+      title: "College & Course Planning",
+      description:
+        "Beyond just career advice — our mentors help you identify the right colleges, understand entrance requirements, and plan your applications strategically.",
+    },
+    {
+      title: "Your Context, Your Plan",
+      description:
+        "The Smart Choice takes into account your individual strengths, family context, and aspirations to create a truly personalized career roadmap.",
+    },
+  ];
+
+  return (
+    <div className="w-full">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1.5 rounded-full">
+                <GraduationCap className="w-4 h-4" />
+                <span>For Students in Classes 11–12</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Career Selection for{" "}
+                <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                  Class 11-12
+                </span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground">
+                Help students in classes 11–12 make informed career choices and
+                plan their path to the right colleges and courses with{" "}
+                <strong className="text-foreground">{BRAND_NAME}'s</strong>{" "}
+                expert guidance tailored for senior secondary students.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#programs"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md hover:shadow-lg"
+                  data-ocid="career1112.hero.explore.button"
+                >
+                  Explore Programs
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            <div className="relative">
+              <img
+                src="/assets/generated/hero-career-1112.dim_1600x900.png"
+                alt="Class 11-12 students planning their career with The Smart Choice"
+                className="w-full h-auto rounded-2xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Packages */}
+      <PackagesSection />
+
+      {/* Why The Smart Choice */}
+      <section className="py-16 md:py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Why {BRAND_NAME}?
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Class 11-12 is the most decisive phase of a student's academic
+                life. Make every decision count with expert support.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {whyPoints.map((point) => (
+                <div
+                  key={point.title}
+                  className="bg-card border border-border rounded-xl p-6"
+                >
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    {point.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {point.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

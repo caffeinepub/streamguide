@@ -1,66 +1,81 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
 
 interface TallyFormEmbedProps {
-  /**
-   * The Tally form URL (e.g., https://tally.so/r/yourFormId)
-   * or the full embed code from Tally
-   */
-  formUrlOrEmbedCode: string;
-  /**
-   * Height of the iframe (default: 600px)
-   */
-  height?: string;
-  /**
-   * Additional CSS classes for the container
-   */
+  formId: string;
+  hideTitle?: boolean;
+  dynamicHeight?: boolean;
+  height?: number;
   className?: string;
+  title?: string;
+  alignLeft?: boolean;
 }
 
 export default function TallyFormEmbed({
-  formUrlOrEmbedCode,
-  height = '600px',
-  className = '',
+  formId,
+  hideTitle = true,
+  dynamicHeight = true,
+  height = 897,
+  className = "",
+  title = "Tally Form",
+  alignLeft = false,
 }: TallyFormEmbedProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isEmbedCode = formUrlOrEmbedCode.includes('<iframe') || formUrlOrEmbedCode.includes('<script');
+  const params = new URLSearchParams();
+  if (alignLeft) params.set("alignLeft", "1");
+  if (hideTitle) params.set("hideTitle", "1");
+  if (dynamicHeight) params.set("dynamicHeight", "1");
+
+  const tallySrc = `https://tally.so/embed/${formId}?${params.toString()}`;
 
   useEffect(() => {
-    // If it's embed code with script tags, inject it
-    if (isEmbedCode && containerRef.current) {
-      containerRef.current.innerHTML = formUrlOrEmbedCode;
+    const TALLY_SCRIPT_URL = "https://tally.so/widgets/embed.js";
 
-      // Execute any scripts in the embed code
-      const scripts = containerRef.current.getElementsByTagName('script');
-      Array.from(scripts).forEach((oldScript) => {
-        const newScript = document.createElement('script');
-        Array.from(oldScript.attributes).forEach((attr) => {
-          newScript.setAttribute(attr.name, attr.value);
-        });
-        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-        oldScript.parentNode?.replaceChild(newScript, oldScript);
-      });
+    const loadEmbeds = () => {
+      if (typeof window.Tally !== "undefined") {
+        window.Tally.loadEmbeds();
+      } else {
+        const iframes = document.querySelectorAll<HTMLIFrameElement>(
+          "iframe[data-tally-src]:not([src])",
+        );
+        for (const el of iframes) {
+          el.src = el.dataset.tallySrc ?? "";
+        }
+      }
+    };
+
+    if (typeof window.Tally !== "undefined") {
+      loadEmbeds();
+    } else if (!document.querySelector(`script[src="${TALLY_SCRIPT_URL}"]`)) {
+      const script = document.createElement("script");
+      script.src = TALLY_SCRIPT_URL;
+      script.onload = loadEmbeds;
+      script.onerror = loadEmbeds;
+      document.body.appendChild(script);
+    } else {
+      loadEmbeds();
     }
-  }, [formUrlOrEmbedCode, isEmbedCode]);
+  }, []);
 
-  // If it's just a URL, render an iframe
-  if (!isEmbedCode) {
-    return (
-      <div className={`w-full ${className}`}>
-        <iframe
-          src={formUrlOrEmbedCode}
-          width="100%"
-          height={height}
-          frameBorder="0"
-          marginHeight={0}
-          marginWidth={0}
-          title="Contact Form"
-          className="rounded-lg border border-border"
-          style={{ minHeight: height }}
-        />
-      </div>
-    );
-  }
-
-  // If it's embed code, render the container for injection
-  return <div ref={containerRef} className={`w-full ${className}`} />;
+  return (
+    <div className={`w-full ${className}`}>
+      <iframe
+        data-tally-src={tallySrc}
+        loading="lazy"
+        width="100%"
+        height={height}
+        frameBorder={0}
+        marginHeight={0}
+        marginWidth={0}
+        title={title}
+        style={{ width: "100%" }}
+      />
+    </div>
+  );
 }

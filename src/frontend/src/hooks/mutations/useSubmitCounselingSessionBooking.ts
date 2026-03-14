@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from '../useActor';
-import { Grade, PreferredMode, WhoIsFilling } from '../../backend';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Grade, PreferredMode, WhoIsFilling } from "../../backend";
+import { useActor } from "../useActor";
 
 interface SubmitCounselingSessionBookingParams {
   name: string;
@@ -21,7 +21,7 @@ export function useSubmitCounselingSessionBooking() {
 
   return useMutation({
     mutationFn: async (params: SubmitCounselingSessionBookingParams) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
 
       const id = await actor.submitCounselingSessionBooking(
         params.name,
@@ -33,13 +33,15 @@ export function useSubmitCounselingSessionBooking() {
         params.preferredDate,
         params.preferredTimeWindow,
         params.preferredMode,
-        params.notes
+        params.notes,
       );
 
       return id;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['counselingSessionBookings'] });
+      queryClient.invalidateQueries({
+        queryKey: ["counselingSessionBookings"],
+      });
     },
   });
 }
