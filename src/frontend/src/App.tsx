@@ -12,6 +12,7 @@ import CareerPlanning1112Page from "./pages/CareerPlanning1112Page";
 import ContactPage from "./pages/ContactPage";
 import CounselingPage from "./pages/CounselingPage";
 import HomePage from "./pages/HomePage";
+import KnowledgeHubPage from "./pages/KnowledgeHubPage";
 import PsychometricTestPage from "./pages/PsychometricTestPage";
 import StreamCareer810Page from "./pages/StreamCareer810Page";
 
@@ -69,6 +70,12 @@ const contactRoute = createRoute({
   component: ContactPage,
 });
 
+const knowledgeHubRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/knowledge-hub",
+  component: KnowledgeHubPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   streamCareer810Route,
@@ -76,6 +83,7 @@ const routeTree = rootRoute.addChildren([
   psychometricTestRoute,
   counselingRoute,
   contactRoute,
+  knowledgeHubRoute,
 ]);
 
 const router = createRouter({ routeTree });

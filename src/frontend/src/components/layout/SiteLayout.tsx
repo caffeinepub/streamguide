@@ -71,8 +71,8 @@ export default function SiteLayout({
     },
     {
       label: "Knowledge Hub",
-      path: "https://thesmartchoice.notion.site/TSC-Knowledge-Hub-d5e0532d3d6541e4b66ad90bd9f40b25",
-      external: true,
+      path: "/knowledge-hub",
+      external: false,
     },
     { label: "Contact Us", path: "/contact", external: false },
   ];
@@ -169,16 +169,14 @@ export default function SiteLayout({
                 </button>
                 {resourcesOpen && (
                   <div className="absolute top-full left-0 mt-1 w-56 bg-background border border-border rounded-lg shadow-lg z-50 py-1">
-                    <a
-                      href="https://thesmartchoice.notion.site/TSC-Knowledge-Hub-d5e0532d3d6541e4b66ad90bd9f40b25"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to="/knowledge-hub"
                       className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-foreground hover:bg-accent/50 transition-colors"
                       onClick={() => setResourcesOpen(false)}
                       data-ocid="nav.resources.knowledgehub.link"
                     >
                       Knowledge Hub
-                    </a>
+                    </Link>
                     <div className="flex items-center gap-2 px-4 py-2.5 text-sm text-muted-foreground cursor-default">
                       <span>Blog</span>
                       <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">
@@ -293,16 +291,14 @@ export default function SiteLayout({
               </button>
               {mobileResourcesOpen && (
                 <div className="bg-muted/30">
-                  <a
-                    href="https://thesmartchoice.notion.site/TSC-Knowledge-Hub-d5e0532d3d6541e4b66ad90bd9f40b25"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("/knowledge-hub")}
                     className="block w-full text-left pl-8 pr-4 py-2.5 text-sm text-foreground/70 hover:text-foreground hover:bg-accent/50 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
                     data-ocid="nav.mobile.knowledgehub.link"
                   >
                     Knowledge Hub
-                  </a>
+                  </button>
                   <div className="flex items-center gap-2 pl-8 pr-4 py-2.5 text-sm text-muted-foreground">
                     <span>Blog</span>
                     <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">
