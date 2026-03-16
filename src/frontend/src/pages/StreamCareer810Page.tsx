@@ -22,7 +22,7 @@ function PackagesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {/* Card 1: Smart Choice Discovery */}
           <div
             className="bg-card border border-border rounded-2xl p-6 flex flex-col"
@@ -98,15 +98,26 @@ function PackagesSection() {
               </li>
             </ul>
 
-            <button
-              type="button"
-              onClick={() => navigate({ to: "/psychometric-test" })}
-              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-amber-700 border-2 border-amber-600 rounded-lg hover:bg-amber-50 transition-all"
-              data-ocid="packages.discovery.learn_more.button"
-            >
-              Learn More
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </button>
+            <div className="mt-auto">
+              <button
+                type="button"
+                onClick={() =>
+                  navigate({ to: "/psychometric-test", hash: "booking" })
+                }
+                className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
+                data-ocid="packages.discovery.register.button"
+              >
+                Register Now
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </button>
+              <Link
+                to="/psychometric-test"
+                className="mt-2 w-full inline-flex items-center justify-center gap-1 text-sm text-amber-700 hover:text-amber-800 hover:underline transition-colors"
+                data-ocid="packages.discovery.learn_more.link"
+              >
+                Learn More
+              </Link>
+            </div>
           </div>
 
           {/* Card 2: Smart Choice Guidance — Most Popular */}
@@ -167,25 +178,34 @@ function PackagesSection() {
               </li>
             </ul>
 
-            <button
-              type="button"
-              onClick={() => navigate({ to: "/counseling" })}
-              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
-              data-ocid="packages.guidance.learn_more.button"
-            >
-              Learn More
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </button>
-            <a
-              href="https://www.bodhami.com/summary/counselor?id=SameerPopli"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 w-full inline-flex items-center justify-center gap-1.5 text-sm font-medium text-amber-700 hover:text-amber-800 hover:underline transition-colors"
-              data-ocid="packages.guidance.meet_counselor.link"
-            >
-              Meet your Counselor
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            <div className="mt-auto">
+              <button
+                type="button"
+                onClick={() => navigate({ to: "/counseling", hash: "booking" })}
+                className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
+                data-ocid="packages.guidance.register.button"
+              >
+                Register Now
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </button>
+              <Link
+                to="/counseling"
+                className="mt-2 w-full inline-flex items-center justify-center gap-1 text-sm text-amber-700 hover:text-amber-800 hover:underline transition-colors"
+                data-ocid="packages.guidance.learn_more.link"
+              >
+                Learn More
+              </Link>
+              <a
+                href="https://www.bodhami.com/summary/counselor?id=SameerPopli"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 w-full inline-flex items-center justify-center gap-1.5 text-sm font-medium text-amber-700 hover:text-amber-800 hover:underline transition-colors"
+                data-ocid="packages.guidance.meet_counselor.link"
+              >
+                Meet your Counselor
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
           {/* Card 3: Smart Choice Mentorship — Coming Soon */}
@@ -240,14 +260,16 @@ function PackagesSection() {
               </li>
             </ul>
 
-            <Link
-              to="/contact"
-              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-muted-foreground border border-border rounded-lg hover:border-amber-300 hover:text-amber-700 transition-all"
-              data-ocid="packages.mentorship.contact.button"
-            >
-              Contact Us for More Details
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            <div className="mt-auto">
+              <Link
+                to="/contact"
+                className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-muted-foreground border border-border rounded-lg hover:border-amber-300 hover:text-amber-700 transition-all"
+                data-ocid="packages.mentorship.contact.button"
+              >
+                Contact Us for More Details
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

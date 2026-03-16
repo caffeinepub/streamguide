@@ -17,11 +17,20 @@ import PsychometricTestPage from "./pages/PsychometricTestPage";
 import StreamCareer810Page from "./pages/StreamCareer810Page";
 
 function ScrollToTop() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname change should trigger scroll
+  const { pathname, hash } = useRouterState({ select: (s) => s.location });
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname/hash changes should trigger scroll
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname]);
+    if (hash) {
+      // Give the page a tick to render before scrolling to the anchor
+      const id = hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [pathname, hash]);
   return null;
 }
 

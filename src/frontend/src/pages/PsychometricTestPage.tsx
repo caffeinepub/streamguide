@@ -41,7 +41,7 @@ export default function PsychometricTestPage() {
       icon: BarChart,
       title: "Data-Driven Insights",
       description:
-        "Receive a detailed 50-page personalized report with actionable guidance.",
+        "Receive a detailed 40+ page personalized report with actionable guidance.",
     },
   ];
 
@@ -85,7 +85,7 @@ export default function PsychometricTestPage() {
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
               The Smart Choice Discovery is your first step toward a confident
               future. Through a scientifically designed assessment and a
-              personalized 50-page report, you'll discover your strengths,
+              personalized 40+ page report, you'll discover your strengths,
               interests, and the streams and careers best suited to you.
             </p>
 
@@ -161,7 +161,7 @@ export default function PsychometricTestPage() {
         </div>
       </section>
 
-      {/* 50-Page Report */}
+      {/* 40+ Page Report */}
       <section className="py-16 md:py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -172,12 +172,12 @@ export default function PsychometricTestPage() {
                     <FileText className="w-6 h-6 text-amber-600" />
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                    Your Personalized 50-Page Report
+                    Your Personalized 40+ Page Report
                   </h2>
                 </div>
                 <p className="text-muted-foreground mb-6">
                   Every Smart Choice Discovery assessment comes with a
-                  comprehensive, personalized 50-page report — crafted
+                  comprehensive, personalized 40+ page report — crafted
                   specifically for you, not a generic template.
                 </p>
                 <ul className="space-y-3">
@@ -190,7 +190,9 @@ export default function PsychometricTestPage() {
                 </ul>
               </div>
               <div className="bg-card border-2 border-amber-200 rounded-2xl p-8 text-center">
-                <div className="text-6xl font-bold text-amber-600 mb-2">50</div>
+                <div className="text-6xl font-bold text-amber-600 mb-2">
+                  40+
+                </div>
                 <div className="text-lg font-semibold text-foreground mb-1">
                   Page Report
                 </div>
@@ -209,6 +211,7 @@ export default function PsychometricTestPage() {
 
       {/* Registration Form Section */}
       <section
+        id="booking"
         ref={formRef}
         className="py-16 md:py-20 bg-background scroll-mt-16"
       >

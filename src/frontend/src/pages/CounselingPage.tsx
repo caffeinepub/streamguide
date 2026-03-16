@@ -262,6 +262,7 @@ export default function CounselingPage() {
 
       {/* Booking Form Section */}
       <section
+        id="booking"
         ref={formRef}
         className="py-16 md:py-20 bg-muted/30 scroll-mt-16"
       >
