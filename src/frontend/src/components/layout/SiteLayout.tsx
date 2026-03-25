@@ -86,10 +86,10 @@ export default function SiteLayout({
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
+            {/* Brand Text Logo */}
             <Link to="/" className="flex items-center shrink-0">
-              <span className="text-xl sm:text-2xl font-bold text-amber-600 hover:text-amber-700 transition-colors">
-                {BRAND_NAME}
+              <span className="text-xl font-bold text-amber-600 tracking-tight">
+                The Smart Choice
               </span>
             </Link>
 
