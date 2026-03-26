@@ -15,6 +15,7 @@ import HomePage from "./pages/HomePage";
 import KnowledgeHubPage from "./pages/KnowledgeHubPage";
 import PsychometricTestPage from "./pages/PsychometricTestPage";
 import StreamCareer810Page from "./pages/StreamCareer810Page";
+import StreamClarityLandingPage from "./pages/StreamClarityLandingPage";
 
 function ScrollToTop() {
   const { pathname, hash } = useRouterState({ select: (s) => s.location });
@@ -85,6 +86,12 @@ const knowledgeHubRoute = createRoute({
   component: KnowledgeHubPage,
 });
 
+const streamClarityLandingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/stream-clarity-landing",
+  component: StreamClarityLandingPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   streamCareer810Route,
@@ -93,6 +100,7 @@ const routeTree = rootRoute.addChildren([
   counselingRoute,
   contactRoute,
   knowledgeHubRoute,
+  streamClarityLandingRoute,
 ]);
 
 const router = createRouter({ routeTree });
