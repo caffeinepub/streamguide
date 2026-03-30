@@ -115,7 +115,8 @@ export default function StreamClarityLandingPage() {
     {
       icon: BookOpen,
       title: "Receive a Personalized Report",
-      description: "A detailed, personalized report — not a generic template",
+      description:
+        "A detailed, personalized report \u2014 not a generic template",
     },
   ];
 
@@ -207,20 +208,20 @@ export default function StreamClarityLandingPage() {
                     ))}
                   </ul>
                 </div>
-
-                {/* Inline Scroll CTA inside the card */}
-                <button
-                  type="button"
-                  data-ocid="stream_clarity.scroll_button"
-                  className="mt-6 pt-5 border-t border-amber-100 flex items-center justify-center gap-2 w-full group hover:opacity-80 transition-opacity"
-                  onClick={scrollToMain}
-                >
-                  <span className="text-amber-700 font-semibold text-sm group-hover:text-amber-800 transition-colors">
-                    {config.ctaLabel}
-                  </span>
-                  <ArrowDown className="w-4 h-4 text-amber-600 animate-bounce" />
-                </button>
               </div>
+
+              {/* Editorial scroll CTA \u2014 outside the card */}
+              <button
+                type="button"
+                data-ocid="stream_clarity.scroll_button"
+                className="mt-8 w-full flex flex-col items-center gap-2 cursor-pointer group bg-transparent border-none outline-none focus:outline-none"
+                onClick={scrollToMain}
+              >
+                <span className="text-xl font-bold text-amber-700 group-hover:text-amber-900 transition-colors tracking-tight">
+                  {config.ctaLabel}
+                </span>
+                <ArrowDown className="w-6 h-6 text-amber-600 group-hover:text-amber-800 animate-bounce transition-colors" />
+              </button>
             </div>
           </div>
         </section>
@@ -249,7 +250,7 @@ export default function StreamClarityLandingPage() {
               {/* Pricing Block */}
               <div className="inline-flex flex-col items-center gap-3 mb-8">
                 <Badge className="bg-green-100 text-green-800 border-green-200 text-sm px-4 py-1 font-semibold">
-                  Special Launch Price — 50% Off
+                  Special Launch Price \u2014 50% Off
                 </Badge>
                 <div className="flex items-baseline gap-3">
                   <span className="text-4xl md:text-5xl font-bold text-amber-600">
@@ -272,7 +273,8 @@ export default function StreamClarityLandingPage() {
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <p className="text-sm text-muted-foreground">
-                  40 page report · Science-backed · Personalized for you
+                  40 page report \u00b7 Science-backed \u00b7 Personalized for
+                  you
                 </p>
               </div>
             </div>
@@ -321,8 +323,8 @@ export default function StreamClarityLandingPage() {
                 What's Inside Your Personalized Report
               </h2>
               <p className="text-muted-foreground mb-8">
-                Every section is crafted specifically for you — not a generic
-                template.
+                Every section is crafted specifically for you \u2014 not a
+                generic template.
               </p>
               <ul className="space-y-3 text-left inline-block">
                 {reportItems.map((item) => (
@@ -345,8 +347,8 @@ export default function StreamClarityLandingPage() {
               </h2>
               <p className="text-amber-100 mb-6 text-lg">
                 Thousands of students are confused about their stream.{" "}
-                {BRAND_NAME} Discovery gives you the clarity you need — backed
-                by data, not guesswork.
+                {BRAND_NAME} Discovery gives you the clarity you need \u2014
+                backed by data, not guesswork.
               </p>
               <div className="flex flex-col items-center gap-4">
                 <div className="flex items-baseline gap-3">
