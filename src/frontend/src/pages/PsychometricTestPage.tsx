@@ -1,4 +1,5 @@
 import { BRAND_NAME } from "@/constants/brand";
+import { Link } from "@tanstack/react-router";
 import {
   BarChart,
   Brain,
@@ -115,6 +116,20 @@ export default function PsychometricTestPage() {
             >
               Register Now
             </button>
+
+            <p
+              className="mt-3 block text-sm text-muted-foreground"
+              data-ocid="discovery.hero.stream_clarity.link"
+            >
+              Not ready for the full assessment yet?{" "}
+              <Link
+                to="/stream-clarity-index"
+                className="text-amber-600 hover:text-amber-700 hover:underline"
+              >
+                Take our free Stream Clarity Index first
+              </Link>{" "}
+              — a 2-minute test that shows you exactly where you stand.
+            </p>
           </div>
         </div>
       </section>

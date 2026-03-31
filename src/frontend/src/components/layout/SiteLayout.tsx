@@ -77,7 +77,6 @@ export default function SiteLayout({
       path: KNOWLEDGE_HUB_URL,
       external: true,
     },
-    { label: "Contact Us", path: "/contact", external: false },
   ];
 
   return (
@@ -171,7 +170,7 @@ export default function SiteLayout({
                   />
                 </button>
                 {resourcesOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-56 bg-background border border-border rounded-lg shadow-lg z-50 py-1">
+                  <div className="absolute top-full left-0 mt-1 w-60 bg-background border border-border rounded-lg shadow-lg z-50 py-1">
                     <a
                       href={KNOWLEDGE_HUB_URL}
                       target="_blank"
@@ -182,6 +181,17 @@ export default function SiteLayout({
                     >
                       Knowledge Hub
                     </a>
+                    <Link
+                      to="/stream-clarity-index"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground/80 hover:text-foreground hover:bg-accent/50 transition-colors"
+                      onClick={() => setResourcesOpen(false)}
+                      data-ocid="nav.resources.streamclarity.link"
+                    >
+                      Stream Clarity Index
+                      <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-medium">
+                        Free Tool
+                      </span>
+                    </Link>
                     <div className="flex items-center gap-2 px-4 py-2.5 text-sm text-muted-foreground cursor-default">
                       <span>Blog</span>
                       <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">
@@ -306,6 +316,17 @@ export default function SiteLayout({
                   >
                     Knowledge Hub
                   </a>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("/stream-clarity-index")}
+                    className="flex items-center gap-2 w-full text-left pl-8 pr-4 py-2.5 text-sm text-foreground/70 hover:text-foreground hover:bg-accent/50 transition-colors"
+                    data-ocid="nav.mobile.streamclarity.link"
+                  >
+                    Stream Clarity Index
+                    <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-medium">
+                      Free Tool
+                    </span>
+                  </button>
                   <div className="flex items-center gap-2 pl-8 pr-4 py-2.5 text-sm text-muted-foreground">
                     <span>Blog</span>
                     <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">
@@ -405,14 +426,14 @@ export default function SiteLayout({
                 to="/contact"
                 className="text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
               >
-                Contact Us →
+                Contact Us &rarr;
               </Link>
             </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-border/40 text-center text-sm text-muted-foreground">
             <p>
-              © {new Date().getFullYear()} {BRAND_NAME}. Built with{" "}
+              &copy; {new Date().getFullYear()} {BRAND_NAME}. Built with{" "}
               <Heart className="inline-block w-4 h-4 text-red-500 fill-current" />{" "}
               using{" "}
               <a

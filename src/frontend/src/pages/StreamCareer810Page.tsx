@@ -272,6 +272,26 @@ function PackagesSection() {
             </div>
           </div>
         </div>
+
+        {/* Free tool CTA strip */}
+        <div className="mt-10 max-w-5xl mx-auto">
+          <div
+            className="bg-amber-50 border border-amber-200 rounded-xl px-6 py-4 text-center"
+            data-ocid="packages.stream_clarity.strip"
+          >
+            <p className="text-sm text-muted-foreground">
+              Not sure where to start?{" "}
+              <Link
+                to="/stream-clarity-index"
+                className="text-amber-700 font-medium hover:text-amber-800 hover:underline transition-colors"
+                data-ocid="packages.stream_clarity.link"
+              >
+                Take our free Stream Clarity Index test first — a 2-minute test
+                that shows you exactly where you stand →
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
